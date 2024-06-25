@@ -9,6 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.AlertsWindowsPage;
+import pages.FramePage;
+import pages.HomePage;
+import pages.NestedFramePage;
 
 import java.time.Duration;
 
@@ -35,43 +39,21 @@ public class FrameTest {
         PageMethods pageMethods = new PageMethods(driver);
         FrameMethods frameMethods = new FrameMethods(driver);
 
-        pageMethods.scrollPage(0, 350);
-        WebElement alertsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        // alertsMenu.click();
-        frameMethods.switchtoFrame(alertsMenu);
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateToAlertsMenu();
 
-        WebElement frameButton = driver.findElement(By.xpath("//span[text()='Frames']"));
-        //alertsForm.click();
-        frameMethods.switchtoFrame(frameButton);
 
-        //Ne mutam focusul pe un iframe
-        //driver.switchTo().frame("frame1");
-        frameMethods.switchtoFrame("frame1");
-        WebElement iframeText = driver.findElement(By.id("sampleHeading"));
-        System.out.println(iframeText.getText());
+        AlertsWindowsPage alertsWindowsPage = new AlertsWindowsPage(driver);
+        alertsWindowsPage.navigateToFramePage();
 
-        //Ne intoarcem cu focusul la frame-ul default
-       // driver.switchTo().defaultContent();
-        frameMethods.defaultContent();
+        FramePage framePage = new FramePage(driver);
+        framePage.interectWithBigIFrame();
+        framePage.interectWithSmallIFame();
+        framePage.navigateToNastedFrame();
 
-        frameMethods.switchtoFrame("frame2");
-        WebElement iframeText2 = driver.findElement(By.id("sampleHeading"));
-        System.out.println(iframeText2.getText());
+        NestedFramePage nestedFramePage = new NestedFramePage(driver);
+        nestedFramePage.interectWithNestedFrame();
 
-        frameMethods.defaultContent();
-
-        pageMethods.scrollPage(0, 350);
-        WebElement nestedButton = driver.findElement(By.xpath("//span[text()='Nested Frames']"));
-        //alertsForm.click();
-        elementMethods.clickElement(nestedButton);
-
-        //Interactionam cu iframe in iframe
-        frameMethods.switchtoFrame("frame1");
-        WebElement childFrame = driver.findElement(By.xpath("'//iframe[@srcdoc='<p>Child Iframe</p>']'"));
-        System.out.println(childFrame.getText());
-
-        WebElement text = driver.findElement(By.xpath("//p"));
-        System.out.println(text.getText());
 
         //driver.quit();
     }
