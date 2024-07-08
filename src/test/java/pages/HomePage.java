@@ -26,6 +26,9 @@ public class HomePage {
     @FindBy(xpath = "//h5[text()='Forms']")
     public  WebElement formMenu;
 
+    @FindBy(xpath = "//h5[text()='Elements']")
+    public WebElement elementMenu;
+
     public void navigateToAlertsMenu(){
         pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(alertsMenu);
@@ -34,5 +37,10 @@ public class HomePage {
     public void navigateToFormMenu(){
         pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(formMenu);
+    }
+
+    public void navigateToElementMenu(){
+        pageMethods.scrollPage(0, 350);
+        elementMethods.clickElement(elementMenu);
     }
 }
