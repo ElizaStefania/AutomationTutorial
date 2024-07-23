@@ -1,34 +1,23 @@
 package pages;
 
-import helperMethods.ElementMethods;
-import helperMethods.PageMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class AlertsWindowsPage {
-
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-    public PageMethods pageMethods;
+public class AlertsWindowsPage extends BasePage {
 
     public AlertsWindowsPage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods = new ElementMethods(driver);
-        pageMethods  = new PageMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(xpath = "//span[text()='Browser Windows']")
-    public WebElement browserWindows;
+    private WebElement browserWindows;
 
     @FindBy(xpath = "//span[text()='Frames']")
-    public WebElement frameButton;
+    private WebElement frameButton;
 
     @FindBy(xpath = "//span[text()='Alerts']")
-    public  WebElement alertForm;
-
+    private WebElement alertForm;
 
     public void navigateToWindowPage(){
         pageMethods.scrollPage(0, 100);
@@ -36,12 +25,12 @@ public class AlertsWindowsPage {
     }
 
     public void navigateToFramePage(){
-        pageMethods.scrollPage(0, 100);
+        pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(frameButton);
     }
 
     public void  navigateToMenuPage(){
-        pageMethods.scrollPage(0, 100);
+        pageMethods.scrollPage(0,350);
         elementMethods.clickElement(alertForm);
     }
 }

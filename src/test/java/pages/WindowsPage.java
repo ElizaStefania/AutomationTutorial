@@ -1,35 +1,20 @@
 package pages;
 
-import helperMethods.ElementMethods;
-import helperMethods.PageMethods;
-import helperMethods.WindowsMethods;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class WindowsPage {
-
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-    public PageMethods pageMethods;
-    public WindowsMethods windowsMethods;
+public class WindowsPage extends BasePage{
 
     public WindowsPage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods = new ElementMethods(driver);
-        pageMethods  = new PageMethods(driver);
-        windowsMethods = new WindowsMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(id = "tabButton")
-    public WebElement newTab;
+    private WebElement newTab;
 
     @FindBy(id = "windowButton")
-    public WebElement newWindow;
-
+    private WebElement newWindow;
 
     public void interactWithNewTab(){
         pageMethods.scrollPage(0, 150);

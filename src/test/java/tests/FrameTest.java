@@ -13,48 +13,28 @@ import pages.AlertsWindowsPage;
 import pages.FramePage;
 import pages.HomePage;
 import pages.NestedFramePage;
+import shareData.ShareData;
 
 import java.time.Duration;
 
-public class FrameTest {
-    public WebDriver driver;
+public class FrameTest extends ShareData {
 
     @Test
     public void metodaTest() {
 
-        //Deschidem un browser
-        driver = new ChromeDriver();
-
-        //Accesam un anumit URL
-        driver.get("https://demoqa.com");
-
-        //Maximize browser
-        driver.manage().window().maximize();
-
-        //Wait implicit
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        AlertMethods alertMethods = new AlertMethods(driver);
-        ElementMethods elementMethods = new ElementMethods(driver);
-        PageMethods pageMethods = new PageMethods(driver);
-        FrameMethods frameMethods = new FrameMethods(driver);
-
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         homePage.navigateToAlertsMenu();
 
-
-        AlertsWindowsPage alertsWindowsPage = new AlertsWindowsPage(driver);
+        AlertsWindowsPage alertsWindowsPage = new AlertsWindowsPage(getDriver());
         alertsWindowsPage.navigateToFramePage();
 
-        FramePage framePage = new FramePage(driver);
+        FramePage framePage = new FramePage(getDriver());
         framePage.interectWithBigIFrame();
         framePage.interectWithSmallIFame();
         framePage.navigateToNastedFrame();
 
-        NestedFramePage nestedFramePage = new NestedFramePage(driver);
+        NestedFramePage nestedFramePage = new NestedFramePage(getDriver());
         nestedFramePage.interectWithNestedFrame();
 
-
-        //driver.quit();
     }
 }

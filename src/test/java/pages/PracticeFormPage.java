@@ -1,93 +1,78 @@
 package pages;
 
-import helperMethods.AlertMethods;
-import helperMethods.ElementMethods;
-import helperMethods.PageMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
-public class PracticeFormPage {
-
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-    public PageMethods pageMethods;
-    public AlertMethods alertMethods;
+public class PracticeFormPage extends BasePage{
 
     public PracticeFormPage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods = new ElementMethods(driver);
-        pageMethods  = new PageMethods(driver);
-        alertMethods = new AlertMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(id = "firstName")
-    public WebElement firstNameElement;
+    private WebElement firstNameElement;
 
     @FindBy(id = "lastName")
-    public WebElement lastNameElement;
+    private WebElement lastNameElement;
 
     @FindBy(id = "userEmail")
-    public WebElement emailElement;
+    private WebElement emailElement;
 
     @FindBy(xpath = "//div[@id='genterWrapper']/div/div/label[@class='custom-control-label']")
-    public List<WebElement> genderElements;
+    private List<WebElement> genderElements;
 
     @FindBy(id = "userNumber")
-    public WebElement mobileNumberElement;
+    private WebElement mobileNumberElement;
 
     @FindBy(id = "dateOfBirthInput")
-    public WebElement dateOfBirth;
+    private WebElement dateOfBirth;
 
     @FindBy(className = "react-datepicker__month-select")
-    public WebElement dateOfBirthMonthElement;
+    private WebElement dateOfBirthMonthElement;
 
     @FindBy(xpath = "//div[@class='react-datepicker__month']//div[not(contains(@class,'--outside-month')) and @role='option']")
-    public List<WebElement> daysOfBirthElements;
+    private List<WebElement> daysOfBirthElements;
 
     @FindBy(className = "react-datepicker__year-select")
-    public WebElement yearOfBirth;
+    private WebElement yearOfBirth;
 
     @FindBy(id = "subjectsInput")
-    public WebElement subjectInputElement;
+    private WebElement subjectInputElement;
 
     @FindBy(xpath = "//div[@id='hobbiesWrapper']/div/div/label[@class='custom-control-label']")
-    public List<WebElement> hobbiesElements;
+    private List<WebElement> hobbiesElements;
 
     @FindBy(id = "uploadPicture")
-    public WebElement uploadPictureElement;
+    private WebElement uploadPictureElement;
 
     @FindBy(id = "currentAddress")
-    public WebElement addressElement;
+    private WebElement addressElement;
 
     @FindBy(id = "state")
-    public WebElement stateElement;
+    private WebElement stateElement;
 
     @FindBy(id = "react-select-3-input")
-    public WebElement stateInputElement;
+    private WebElement stateInputElement;
 
     @FindBy(id = "react-select-4-input")
-    public WebElement cityInputElement;
+    private WebElement cityInputElement;
 
     @FindBy(xpath = "//button[@id='submit']")
-    public WebElement submitForm;
+    private WebElement submitForm;
 
 
     @FindBy(xpath = "//table[@class='table table-dark table-striped table-bordered table-hover']/tbody/tr")
-    public List<WebElement> tableValue;
+    private List<WebElement> tableValue;
 
     @FindBy(id = "example-modal-sizes-title-lg")
-    public WebElement thankYouMessageElement;
-
+    private WebElement thankYouMessageElement;
 
 
     public void fillEntireForm(String firstNameValue, String lastNameValue, String emailNameValue,

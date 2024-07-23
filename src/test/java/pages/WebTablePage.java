@@ -1,73 +1,65 @@
 package pages;
 
-import helperMethods.ElementMethods;
-import helperMethods.PageMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class WebTablePage {
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-    public PageMethods pageMethods;
+public class WebTablePage extends BasePage{
 
     public WebTablePage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods = new ElementMethods(driver);
-        pageMethods = new PageMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
     @FindBy(id = "addNewRecordButton")
-    public WebElement addElement;
+    private WebElement addRecordButton;
 
     @FindBy(id = "firstName")
-    public WebElement firstNameElement;
+    private WebElement firstNameElement;
 
     @FindBy(id = "lastName")
-    public WebElement lastNameElement;
+    private WebElement lastNameElement;
 
     @FindBy(id = "userEmail")
-    public WebElement userEmailElement;
+    private WebElement userEmailElement;
 
     @FindBy(id = "age")
-    public WebElement ageElement;
+    private WebElement ageElement;
 
     @FindBy(id = "salary")
-    public WebElement salaryElement;
+    private WebElement salaryElement;
 
     @FindBy(id = "department")
-    public WebElement departmentElement;
+    private WebElement departmentElement;
 
     @FindBy(id = "submit")
-    public WebElement submitElement;
+    private WebElement submitElement;
 
     @FindBy(id = "edit-record-4")
-    public WebElement updateEntry;
+    private WebElement updateEntry;
 
     @FindBy(id = "salary")
-    public WebElement editSalaryElement;
+    private WebElement editSalaryElement;
 
     @FindBy(id = "departament")
-    public WebElement editDepartmentElement;
+    private WebElement editDepartmentElement;
 
     @FindBy(id = "submit")
-    public WebElement editSubmitElement;
+    private WebElement editSubmitElement;
 
     @FindBy(id = "delete-record-4")
-    public WebElement deleteEntry;
-
-
+    private WebElement deleteEntry;
 
     public void addEntry(String firstNameValue, String lastNameValue, String userEmailValue,
                          String ageValue, String salaryValue, String departmentValue){
-        elementMethods.clickElement(addElement);
+        pageMethods.scrollPage(0, 150);
+        elementMethods.clickElement(addRecordButton);
         elementMethods.fillelement(firstNameElement, firstNameValue);
         elementMethods.fillelement(lastNameElement, lastNameValue);
         elementMethods.fillelement(userEmailElement, userEmailValue);
         elementMethods.fillelement(ageElement, ageValue);
         elementMethods.fillelement(salaryElement, salaryValue);
         elementMethods.fillelement(departmentElement, departmentValue);
+        pageMethods.scrollPage(0, 150);
         elementMethods.clickElement(submitElement);
 
     }
