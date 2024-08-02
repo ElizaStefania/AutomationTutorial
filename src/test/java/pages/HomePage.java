@@ -1,5 +1,6 @@
 package pages;
 
+import loggerUtility.LoggerUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,15 +23,18 @@ public class HomePage extends BasePage {
     public void navigateToAlertsMenu(){
         pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(alertsMenu);
+        LoggerUtility.info("The user clicks on Alerts menu");
     }
 
     public void navigateToFormMenu(){
         pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(formMenu);
+        LoggerUtility.info("The user clicks on Form menu");
     }
 
     public void navigateToElementMenu(){
         pageMethods.scrollPage(0, 350);
         elementMethods.clickElement(elementMenu);
+        LoggerUtility.info("The user clicks on Element menu");
     }
 }

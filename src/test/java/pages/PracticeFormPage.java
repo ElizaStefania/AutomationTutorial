@@ -1,5 +1,6 @@
 package pages;
 
+import loggerUtility.LoggerUtility;
 import objectData.PracticeFormObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -78,9 +79,13 @@ public class PracticeFormPage extends BasePage{
 
     public void fillEntireForm(PracticeFormObject testData){
         elementMethods.fillelement(firstNameElement, testData.getFirstNameValue());
+        LoggerUtility.info("The user filled in the firstnameelement with the value: " + testData.getFirstNameValue());
         elementMethods.fillelement(lastNameElement, testData.getLastNameValue());
+        LoggerUtility.info("The user filled in the lastnameelement with the value: " + testData.getLastNameValue());
         elementMethods.fillelement(emailElement, testData.getEmailValue());
+        LoggerUtility.info("The user filled in the emailelement with the value: " + testData.getEmailValue());
         pageMethods.scrollPage(0, 350);
+        LoggerUtility.info("The user scrolled down the page");
       switch (testData.getGenderValue()){
             case "Male":
                 elementMethods.clickElement(genderElements.get(0));
@@ -92,58 +97,86 @@ public class PracticeFormPage extends BasePage{
                 elementMethods.clickElement(genderElements.get(2));
                 break;
         }
+        LoggerUtility.info("The user selected the gender: " + testData.getGenderValue());
         elementMethods.fillelement(mobileNumberElement, testData.getUserNumberValue());
+        LoggerUtility.info("The user filled in the usernumberelement with the value: " + testData.getUserNumberValue());
         elementMethods.clickElement(dateOfBirth);
+        LoggerUtility.info("The user clicked to select the birthdate");
         elementMethods.selectByTextElement(dateOfBirthMonthElement, "September");
+        LoggerUtility.info("The user selected the month September");
         elementMethods.selectByValueElement(yearOfBirth, "2024");
+        LoggerUtility.info("The user selected the year 2024");
         for (Integer index = 0; index<daysOfBirthElements.size(); index++){
             if(daysOfBirthElements.get(index).getText().equals(testData.getChooseDayValue())){
                 elementMethods.clickElement(daysOfBirthElements.get(index));
                 break;
             }
         }
+        LoggerUtility.info("The user submitted the birthdate of: " + testData.getChooseDayValue());
         pageMethods.scrollPage(0, 150);
+        LoggerUtility.info("The user scrolled down the page");
         elementMethods.fillelement(subjectInputElement, testData.getSubjectValue());
+        LoggerUtility.info("The user selected the subjects: " + testData.getSubjectValue());
         elementMethods.pressElement(subjectInputElement, Keys.ENTER);
-         pageMethods.scrollPage(0, 350);
+        LoggerUtility.info("The user submitted their chosen subjects");
+        pageMethods.scrollPage(0, 350);
+        LoggerUtility.info("The user scrolled down the page");
         for(Integer index = 0; index<hobbiesElements.size(); index++) {
             String hobbieText = hobbiesElements.get(index).getText();
             if(testData.getActivitatiValue().contains(hobbieText)){
                 elementMethods.clickJSElement(hobbiesElements.get(index));
             }
         }
+        LoggerUtility.info("The user selected the hobbies: " + testData.getActivitatiValue());
         File file = new File("src/test/resources/" + testData.getTerminatiePath());
         uploadPictureElement.sendKeys(file.getAbsolutePath());
+        LoggerUtility.info("The user uploaded a file");
 
         elementMethods.fillelement(addressElement, testData.getUserAddressValue());
-
+        LoggerUtility.info("The user submitted for currentaddress element the value: " + testData.getUserAddressValue());
         pageMethods.scrollPage(0, 350);
+        LoggerUtility.info("The user scrolled down the page");
         elementMethods.clickElement(stateElement);
+        LoggerUtility.info("The user clicked to select the State");
 
         elementMethods.fillelement(stateInputElement, testData.getStateinputValue());
+        LoggerUtility.info("The user chose the following state: " + testData.getStateinputValue());
         elementMethods.pressElement(stateInputElement, Keys.ENTER);
+        LoggerUtility.info("The user submitted their chosen state");
 
         elementMethods.fillelement(cityInputElement, testData.getCityinputValue());
+        LoggerUtility.info("The user chose the following city: " + testData.getCityinputValue());
         elementMethods.pressElement(cityInputElement, Keys.ENTER);
+        LoggerUtility.info("The user submitted their chosen city");
         pageMethods.scrollPage(0, 350);
+        LoggerUtility.info("The user scrolled down the page");
         elementMethods.clickJSElement(submitForm);
+        LoggerUtility.info("The user submitted the form");
     }
 
     public void validateEntireForm(PracticeFormObject testData){
 
         Assert.assertEquals(thankYouMessageElement.getText(), "Thanks for submitting the form");
-
+        LoggerUtility.info("The user validates the presence of " + thankYouMessageElement.getText());
         Assert.assertEquals(tableValue.get(0).getText(), "Student Name " + testData.getFirstNameValue() + " " + testData.getLastNameValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getFirstNameValue() + " " + testData.getLastNameValue());
         Assert.assertEquals(tableValue.get(1).getText(), "Student Email " + testData.getEmailValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getEmailValue());
         Assert.assertEquals(tableValue.get(2).getText(), "Gender " + testData.getGenderValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getGenderValue());
         Assert.assertEquals(tableValue.get(3).getText(), "Mobile " + testData.getUserNumberValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getUserNumberValue());
         Assert.assertEquals(tableValue.get(5).getText(), "Subjects " + testData.getSubjectValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getSubjectValue());
         String exceptedHobbiesText = "Hobbies " + String.join(", ", testData.getActivitatiValue());
         Assert.assertEquals(tableValue.get(6).getText(), exceptedHobbiesText);
+        LoggerUtility.info("The user validates the presence of " + exceptedHobbiesText);
         Assert.assertEquals(tableValue.get(7).getText(), "Picture " + testData.getTerminatiePath());
+        LoggerUtility.info("The user validates the presence of " + testData.getTerminatiePath());
         Assert.assertEquals(tableValue.get(8).getText(), "Address " + testData.getUserAddressValue());
+        LoggerUtility.info("The user validates the presence of " + testData.getUserAddressValue());
         Assert.assertEquals(tableValue.get(9).getText(), "State and City " + testData.getStateinputValue() + " " + testData.getCityinputValue());
-
+        LoggerUtility.info("The user validates the presence of " + testData.getStateinputValue() + testData.getCityinputValue());
         WebElement closeElement = driver.findElement(By.id("closeLargeModal"));
         //js.executeScript("arguments[0].click;", closeElement);
         elementMethods.clickJSElement(closeElement);
