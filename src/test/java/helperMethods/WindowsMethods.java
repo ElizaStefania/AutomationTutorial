@@ -1,17 +1,15 @@
 package helperMethods;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 public class WindowsMethods {
 
     public WebDriver driver;
-
-    public WindowsMethods(WebDriver driver) {
-        this.driver = driver;
-    }
 
     //Metode generale pentru interactiunea cu tab/window
     public void switchSpecificTab(Integer index){
